@@ -1,0 +1,145 @@
+/*------------------------------------*/
+/* FONT FACE */
+/*------------------------------------*/
+@font-face {
+    font-family: 'roboto';
+    src: url('../fonts/roboto/Roboto-Thin.ttf');
+}
+@font-face {
+    font-family: 'UTM-Alpine-KT';
+    src: url('../fonts/UTM/UTM-Alpine-KT.ttf');
+}
+@font-face {
+    font-family: 'UTM-Aquarelle';
+    src: url('../fonts/UTM/UTM-Aquarelle.ttf');
+}
+@font-face {
+    font-family: 'UTM-Caviar';
+    src: url('../fonts/UTM/UTM-Caviar.ttf');
+}
+@font-face {
+    font-family: 'Lobster';
+    src: url('../fonts/lobster/Lobster-1.4.ttf');
+}
+@font-face {
+    font-family: 'UVFDidot';
+    src: url('../fonts/UVFDiDot/UVF-Didot.ttf');
+}
+@font-face {
+    font-family: 'UVFAphroditePro';
+    src: url('../fonts/UVFDiDot/UVF-Aphrodite-Pro.ttf');
+}
+@font-face {
+    font-family: 'UVFBlendaScript';
+    src: url('../fonts/UVFDiDot/UVF-Blenda-Script.ttf');
+}
+
+/*------------------------------------*/
+/* TYPOGRAPHY */
+/*------------------------------------*/
+.heading-primary {
+    display: block;
+    color: var(--color-white-alpha-2);
+    position: relative;
+    width: 100%;
+    text-align: center;
+    margin-top: 10rem;
+    &--main {
+        font-size: 25rem;
+        font-family: var(--heading-main-font);
+        @include respond(tab-port) {
+            font-size: 20rem;
+        }
+        @include respond(phone) {
+            font-size: 13rem;
+        }
+    }
+    &--sub {
+        font-size: 8rem;
+        font-family: var(--heading-sub-font);
+        position: absolute;
+        top: 15%;
+        left: 45%;
+        @include respond(tab-port) {
+            font-size: 6rem;
+        }
+        @include respond(phone) {
+            font-size: 4rem;
+        }
+    }
+    &--muted {
+        margin-left: 2rem;
+        font-size: 4rem;
+        font-family: var(--heading-muted-font);
+        @include respond(tab-port) {
+            font-size: 3rem;
+        }
+        @include respond(phone) {
+            font-size: 2rem;
+        }
+    }
+}
+.heading-secondary {
+    display: block;
+    text-align: center;
+    font-size: 2.2rem;
+    text-transform: uppercase;
+    letter-spacing: 1.8px;
+    &--small {
+        font-size: 1.8rem;
+    }
+    &::after {
+        content: '';
+        display: block;
+        height: 2rem;
+        width: 90%;
+        margin: 0 auto;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-image: url('../images/heading-second-pattern.png');
+    }
+    &--pattern-left {
+        text-align: left;
+        &::after {
+            margin: 0;
+            width: 7rem;
+            height: 3rem;
+            background-size: contain;
+            background-position: center;
+            background-image: url('../images/heading-second-pattern-left.png');
+        }
+    }
+}
+.heading-tertiary {
+    font-size: 1.5rem;
+    &--small {
+        font-size: 1.3rem;
+    }
+    @include respond(tab-port) {
+        font-size: 2rem;
+    }
+    text-transform: uppercase;
+}
+.number-highlight {
+    font-size: 3rem;
+
+    font-family: var(--price-font);
+    color: var(--color-highlight);
+    text-transform: uppercase;
+
+    &__sub {
+        text-transform: lowercase;
+    }
+    &--small {
+        font-size: 2rem;
+    }
+    &--under {
+        font-size: 1.3rem;
+        font-family: var(--default-font);
+    }
+    &--muted {
+        font-size: 1.5rem;
+        color: var(--color-grey-dark-1);
+        text-decoration: line-through;
+    }
+}

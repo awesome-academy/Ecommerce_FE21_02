@@ -1,0 +1,116 @@
+.top-menu {
+    position: absolute;
+    width: 100%;
+    z-index: 9999;
+    background-color: var(--color-primary-alpha);
+    padding: 0.5rem 0;
+    color: var(--color-white);
+    &--white {
+        position: static;
+        background-color: var(--color-white);
+        color: var(--color-black);
+    }
+    &__brand {
+        font-family: var(--brand-font);
+        font-size: 2.5rem;
+        color: var(--color-white);
+        display: none;
+        @include respond(tab-port) {
+            display: inline-block;
+        }
+    }
+    &__toggle {
+        display: none;
+        @include respond(tab-port) {
+            display: initial;
+            align-self: center;
+            cursor: pointer;
+            margin-left: auto;
+        }
+    }
+    .menu {
+        overflow: hidden;
+
+        &__list {
+            margin-top: 0.5rem;
+            display: flex;
+            justify-content: space-between;
+            margin-left: -1px;
+            @include respond(tab-land) {
+                flex-wrap: wrap;
+            }
+        }
+        &__item {
+            flex-basis: auto;
+            margin: 0.25em 0;
+            padding: 0 1.2rem;
+            text-align: center;
+            border-left: 1px solid var(--color-white);
+            @include respond(tab-port) {
+                // flex-grow: 1;
+                flex-basis: 30%;
+            }
+            @include respond(tab-port) {
+                display: none;
+            }
+            @include respond(phone) {
+                display: none;
+            }
+        }
+        &__link {
+            font-size: 1.2rem;
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.2s;
+            border-bottom: none;
+            &:hover {
+                color: var(--color-highlight);
+                border-bottom: 1px solid var(--color-highlight);
+            }
+        }
+        &__icon {
+            display: flex;
+            height: 2.3rem;
+            line-height: 2;
+            justify-content: space-around;
+            &[data-count]:after {
+                content: attr(data-count);
+                font-size: 35%;
+                padding: 0.2em;
+                height: 70%;
+                border-radius: 50%;
+                line-height: 1em;
+                color: white;
+                background: rgba(255, 0, 0, 0.85);
+                text-align: center;
+                min-width: 1em;
+            }
+        }
+    }
+    .search-box {
+        height: 100%;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        &::before {
+            content: '|';
+            color: inherit;
+            margin-right: 1rem;
+        }
+        &__input {
+            color: inherit;
+            font-size: 1.2rem;
+            border: none;
+            background: transparent;
+            outline: none;
+        }
+        &__input::-webkit-input-placeholder {
+            color: inherit;
+        }
+
+        &__icon {
+            font-size: 1.2rem;
+            color: inherit !important;
+        }
+    }
+}
