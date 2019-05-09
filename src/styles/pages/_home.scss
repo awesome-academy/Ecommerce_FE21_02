@@ -53,19 +53,7 @@
         margin-top: -22rem;
         padding: 7rem;
     }
-    &__info {
-        &__time-box {
-            display: flex;
-            flex-wrap: wrap;
-        }
-        &__time-item {
-            flex: 0 0 50%;
-            @include centerFlexItems;
-            flex-direction: column;
-            padding: 1rem;
-            border: 0.5px solid var(--color-highlight);
-        }
-    }
+
 }
 /*------------------------------------*/
 /* New Products Section */
