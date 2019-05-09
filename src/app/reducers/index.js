@@ -3,13 +3,17 @@ import { filterActions } from "redux-ignore";
 import { targets } from "../constants";
 import category from "./data/categoryReducer";
 import product from "./data/productReducer";
+import productUI from "./ui/productReducer";
 
 import homeContainer from "./ui/homeContainerReducer";
-import productContainer from "./ui/productContainerReducer";
+import topMenu from "./ui/topMenuReducer";
+import productListContainer from "./ui/productListContainerReducer";
 
 export default combineReducers({
   common: combineReducers({
-    category
+    category,
+    topMenu,
+    productUI
   }),
   homePage: combineReducers({
     ui: combineReducers({
@@ -22,14 +26,14 @@ export default combineReducers({
       )
     })
   }),
-  productPage: combineReducers({
+  productListPage: combineReducers({
     ui: combineReducers({
-      productContainer
+      productListContainer
     }),
     data: combineReducers({
       product: filterActions(
         product,
-        action => action.target === targets.PRODUCT_PAGE
+        action => action.target === targets.PRODUCT_LIST_PAGE
       )
     })
   })

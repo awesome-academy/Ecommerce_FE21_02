@@ -1,5 +1,9 @@
 import React from "react";
-
-const Header = () => <header />;
+import TopMenu from "../components/TopMenu";
+const Header = () => (
+  <header>
+    <TopMenu isNotHomePage={true} />
+  </header>
+);
 
 export default Header;

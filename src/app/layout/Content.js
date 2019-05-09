@@ -1,11 +1,7 @@
-import React from 'react';
+import React from "react";
 
-const Content = () => {
-    return (
-        <main>
-
-        </main>
-    );
+const Content = ({ children }) => {
+  return <main>{children}</main>;
 };
 
 export default Content;

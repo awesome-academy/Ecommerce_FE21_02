@@ -15,11 +15,10 @@ export default (state = initialState, action) => {
       };
     }
     case actionTypes.GET_PRODUCT_SUCCESS: {
-      const { product } = action.payload;
-
+      const { data } = action.payload;
       return {
         ...state,
-        data: product,
+        data: data,
         fetchError: null,
         isFetching: false
       };
