@@ -5,7 +5,6 @@ import { connect } from "react-redux";
 class NewProducts extends Component {
   renderList(products) {
     if (products) {
-      debugger;
       let sortedProducts = this.getNewProducts(products);
       return sortedProducts.map((product, index) => {
         if (index > 3) {
@@ -13,7 +12,7 @@ class NewProducts extends Component {
         }
         return (
           <div className="col-sm-6 col-md-3">
-            <Product product={product} isHasTag={true} />
+            <Product key={product.id} product={product} isHasTag={true} />
           </div>
         );
       });

@@ -4,7 +4,7 @@ import Breadcumb from "app/components/Breadcumb";
 import Banner from "./components/Banner";
 import SideBar from "./containers/SideBar";
 import Content from "./containers/Content";
-
+import { withAuthentication } from "app/session";
 class ProductList extends Component {
   render() {
     return (
@@ -21,4 +21,4 @@ class ProductList extends Component {
   }
 }
 
-export default ProductList;
+export default withAuthentication(ProductList);
