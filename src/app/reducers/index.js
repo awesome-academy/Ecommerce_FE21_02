@@ -8,12 +8,22 @@ import productUI from "./ui/productReducer";
 import homeContainer from "./ui/homeContainerReducer";
 import topMenu from "./ui/topMenuReducer";
 import productListContainer from "./ui/productListContainerReducer";
+import sessionReducer from "./data/sessionReducer";
+import userReducer from "./data/userReducer";
 
 export default combineReducers({
   common: combineReducers({
     category,
     topMenu,
     productUI
+  }),
+  user: combineReducers({
+    session: combineReducers({
+      sessionReducer
+    }),
+    data: combineReducers({
+      userReducer
+    })
   }),
   homePage: combineReducers({
     ui: combineReducers({

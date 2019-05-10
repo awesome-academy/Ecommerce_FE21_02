@@ -3,17 +3,24 @@ import { BrowserRouter as Router } from "react-router-dom";
 import { Provider } from "react-redux";
 import store from "./store/index";
 import Layout from "./app/layout/index";
+import FirebaseService, { FirebaseContext } from "./services";
 
 import "bootstrap";
 import "@fortawesome/fontawesome-free/js/all";
+import "react-toastify/dist/ReactToastify.css";
 import "./styles/main.scss";
+import { ToastContainer } from "react-toastify";
 
 function App() {
   return (
     <Provider store={store}>
-      <Router>
-        <Layout />
-      </Router>
+      <FirebaseContext.Provider value={new FirebaseService()}>
+        <Router>
+          <ToastContainer />
+          <Layout />
+        </Router>
+      </FirebaseContext.Provider>
+      ,
     </Provider>
   );
 }

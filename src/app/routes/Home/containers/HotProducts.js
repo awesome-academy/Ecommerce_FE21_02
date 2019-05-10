@@ -4,7 +4,6 @@ import { connect } from "react-redux";
 
 class HotProducts extends Component {
   renderList(products) {
-    debugger;
     if (products) {
       return products.map((product, index) => {
         if (index > 3) {
@@ -12,7 +11,7 @@ class HotProducts extends Component {
         }
         return (
           <div className="col-sm-6 col-md-3">
-            <Product product={product} />
+            <Product key={product.id} product={product} />
           </div>
         );
       });

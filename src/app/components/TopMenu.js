@@ -1,7 +1,13 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { connect } from "react-redux";
-import { withRouter } from "react-router-dom";
+import { compose } from "recompose";
+import { withRouter, Link } from "react-router-dom";
+import * as ROUTES from "app/constants/routes";
+
 import { toggleTopMenu } from "../actions/uiAction";
+import withAuthentication from "../session/withAuthentication";
+import { withFirebase } from "services";
+import { toast } from "react-toastify";
 
 class TopMenu extends React.Component {
   getTopMenuStyle() {
@@ -12,8 +18,14 @@ class TopMenu extends React.Component {
       this.props.toggleTopMenu();
     }
   }
-
+  onLogOut() {
+    this.props.firebase.signOut();
+    toast.success("Đăng xuất thành công", {
+      position: toast.POSITION.BOTTOM_RIGHT
+    });
+  }
   render() {
+    const { authUser } = this.props;
     return (
       <div className={`top-menu ${this.getTopMenuStyle()}`}>
         <div className="container d-flex">
@@ -47,17 +59,40 @@ class TopMenu extends React.Component {
                         Giỏ hàng
                       </a>
                     </span>
-                  </div>{" "}
-                  <div className="menu__item">
-                    <a href="#" className="menu__link">
-                      Đăng nhập
-                    </a>
-                  </div>{" "}
-                  <div className="menu__item">
-                    <a href="#" className="menu__link">
-                      Đăng ký
-                    </a>
                   </div>
+                  {authUser ? (
+                    <Fragment>
+                      <div className="menu__item">
+                        <a href="#" className="menu__link">
+                          {authUser.fullName
+                            ? authUser.fullName
+                            : authUser.email}
+                        </a>
+                      </div>
+                      <div className="menu__item">
+                        <a
+                          href="#"
+                          className="menu__link"
+                          onClick={() => this.onLogOut()}
+                        >
+                          Đăng xuất
+                        </a>
+                      </div>
+                    </Fragment>
+                  ) : (
+                    <Fragment>
+                      <div className="menu__item">
+                        <Link to={ROUTES.LOGIN} className="menu__link">
+                          Đăng nhập
+                        </Link>
+                      </div>
+                      <div className="menu__item">
+                        <Link to={ROUTES.REGISTER} className="menu__link">
+                          Đăng ký
+                        </Link>
+                      </div>
+                    </Fragment>
+                  )}
                 </div>
               </div>
             </div>
@@ -80,11 +115,21 @@ class TopMenu extends React.Component {
 }
 const mapStateToProps = state => {
   const common = state.common;
+  const userStore = state.user;
+  debugger;
+
   return {
-    isWhite: common.topMenu.isWhiteTopMenu
+    isWhite: common.topMenu.isWhiteTopMenu,
+    authUser: userStore.session.sessionReducer.authUser
   };
 };
-export default connect(
-  mapStateToProps,
-  { toggleTopMenu }
-)(withRouter(TopMenu));
+
+export default compose(
+  connect(
+    mapStateToProps,
+    { toggleTopMenu }
+  ),
+  withRouter,
+  withFirebase,
+  withAuthentication
+)(TopMenu);
