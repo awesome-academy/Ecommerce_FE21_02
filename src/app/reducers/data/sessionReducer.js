@@ -7,7 +7,6 @@ const initialState = {
 export default (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.SET_AUTH_USER: {
-      debugger;
       let { authUser } = action.payload;
       return {
         authUser

@@ -46,5 +46,13 @@ export default combineReducers({
         action => action.target === targets.PRODUCT_LIST_PAGE
       )
     })
+  }),
+  productDetailPage: combineReducers({
+    data: combineReducers({
+      product: filterActions(
+        product,
+        action => action.target === targets.PRODUCT_DETAIL_PAGE
+      )
+    })
   })
 });

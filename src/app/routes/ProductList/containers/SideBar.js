@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
+import { compose } from "recompose";
 import { getCategories } from "app/actions/categoryAction";
 import { getAllProducts } from "app/actions/productAction";
 import withTarget from "app/actions/withTargetAction";
@@ -10,9 +11,8 @@ import SubCategoryLink from "../components/SubCategoryLink";
 
 class SideBar extends Component {
   componentDidMount() {
-    this.props.getCategories().then(() => {
-      this.props.getAllProducts(this.props.categories);
-    });
+    this.props.getCategories();
+    this.props.getAllProducts();
   }
 
   renderList() {
@@ -27,7 +27,6 @@ class SideBar extends Component {
                 <SubCategoryLink
                   key={subCategory.id}
                   id={subCategory.id}
-                  categoryId={category.id}
                   name={subCategory.name}
                   isActive={subCategory.id === activeSubCategoryId}
                 />
@@ -104,10 +103,12 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(
-  mapStateToProps,
-  {
-    getCategories: withTarget(getCategories, targets.PRODUCT_LIST_PAGE),
-    getAllProducts: withTarget(getAllProducts, targets.PRODUCT_LIST_PAGE)
-  }
+export default compose(
+  connect(
+    mapStateToProps,
+    {
+      getCategories: withTarget(getCategories, targets.PRODUCT_LIST_PAGE),
+      getAllProducts: withTarget(getAllProducts, targets.PRODUCT_LIST_PAGE)
+    }
+  )
 )(SideBar);

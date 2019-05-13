@@ -16,5 +16,6 @@ export const actionTypes = {
 };
 export const targets = {
   HOME_PAGE: "HOME_PAGE",
-  PRODUCT_LIST_PAGE: "PRODUCT_LIST_PAGE"
+  PRODUCT_LIST_PAGE: "PRODUCT_LIST_PAGE",
+  PRODUCT_DETAIL_PAGE: "PRODUCT_DETAIL_PAGE"
 };

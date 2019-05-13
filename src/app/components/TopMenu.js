@@ -116,7 +116,6 @@ class TopMenu extends React.Component {
 const mapStateToProps = state => {
   const common = state.common;
   const userStore = state.user;
-  debugger;
 
   return {
     isWhite: common.topMenu.isWhiteTopMenu,

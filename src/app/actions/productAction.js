@@ -1,5 +1,5 @@
-import { APIClient, endpoints } from "services/APIClient";
 import { actionTypes, targets } from "../constants";
+import { firebase } from "services/firebase/FirebaseService";
 
 export const getProduct = productId => async dispatch => {
   dispatch({
@@ -7,11 +7,12 @@ export const getProduct = productId => async dispatch => {
   });
 
   try {
-    const product = await APIClient.getProduct(productId);
+    const { data } = await firebase.product(productId);
+    debugger;
     dispatch({
       type: actionTypes.GET_PRODUCT_SUCCESS,
       payload: {
-        product
+        data
       }
     });
   } catch (error) {
@@ -24,18 +25,18 @@ export const getProduct = productId => async dispatch => {
   }
 };
 
-export const getProductsBy = (categoryId, subCategoryId) => async dispatch => {
+export const getProductsBy = subCategoryId => async dispatch => {
   dispatch({
     type: actionTypes.GET_PRODUCT_BEGIN
   });
 
   try {
-    const { data } = await APIClient.getProductsBy(categoryId, subCategoryId);
-
+    const { data } = await firebase.productBy(subCategoryId);
+    debugger;
     dispatch({
       type: actionTypes.GET_PRODUCT_SUCCESS,
       payload: {
-        data: data.products
+        data
       }
     });
     dispatch({
@@ -54,12 +55,12 @@ export const getProductsBy = (categoryId, subCategoryId) => async dispatch => {
   }
 };
 
-export const getAllProducts = categories => async dispatch => {
+export const getAllProducts = () => async dispatch => {
   dispatch({
     type: actionTypes.GET_PRODUCT_BEGIN
   });
   try {
-    const { data } = await APIClient.getAllProducts(categories);
+    const { data } = await firebase.products();
     dispatch({
       type: actionTypes.GET_PRODUCT_SUCCESS,
       payload: {
