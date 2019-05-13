@@ -1,5 +1,5 @@
-import { APIClient, endpoints } from "services/APIClient";
 import { actionTypes, targets } from "../constants";
+import { firebase } from "services/firebase/FirebaseService";
 
 export const getCategories = () => async dispatch => {
   dispatch({
@@ -7,7 +7,7 @@ export const getCategories = () => async dispatch => {
   });
 
   try {
-    const { data } = await APIClient.getCategories();
+    const data = await firebase.categories();
 
     dispatch({
       type: actionTypes.GET_CATEGORY_SUCCESS,
