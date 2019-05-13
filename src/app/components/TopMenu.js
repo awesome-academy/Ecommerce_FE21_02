@@ -13,6 +13,20 @@ class TopMenu extends React.Component {
   getTopMenuStyle() {
     return this.props.isWhite ? "top-menu--white" : "";
   }
+  renderCartMenu(cartItems) {
+    return (
+      <div className="menu__item">
+        <span
+          className="p1 fa-stack fa-2x has-badge menu__icon"
+          data-count={cartItems.length}
+        >
+          <Link to={ROUTES.CART} className="menu__link">
+            Giỏ hàng
+          </Link>
+        </span>
+      </div>
+    );
+  }
   componentDidMount() {
     if (this.props.history.location.pathname === "/") {
       this.props.toggleTopMenu();
@@ -25,7 +39,7 @@ class TopMenu extends React.Component {
     });
   }
   render() {
-    const { authUser } = this.props;
+    const { authUser, cartItems } = this.props;
     return (
       <div className={`top-menu ${this.getTopMenuStyle()}`}>
         <div className="container d-flex">
@@ -49,17 +63,7 @@ class TopMenu extends React.Component {
                       Trạng thái đơn hàng
                     </a>
                   </div>{" "}
-                  <div className="menu__item">
-                    <span
-                      className="p1 fa-stack fa-2x has-badge menu__icon"
-                      id="js--cart-icon"
-                      data-count="2"
-                    >
-                      <a href="/cart.html" className="menu__link">
-                        Giỏ hàng
-                      </a>
-                    </span>
-                  </div>
+                  {this.renderCartMenu(cartItems)}
                   {authUser ? (
                     <Fragment>
                       <div className="menu__item">
@@ -118,6 +122,7 @@ const mapStateToProps = state => {
   const userStore = state.user;
 
   return {
+    cartItems: common.cart,
     isWhite: common.topMenu.isWhiteTopMenu,
     authUser: userStore.session.sessionReducer.authUser
   };

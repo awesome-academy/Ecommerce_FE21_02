@@ -1,9 +1,18 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { addToCart } from "../actions/cartAction";
 import newProduct01 from "images/products/newproduct_1.png";
 
 class Product extends Component {
-  renderProduct(isDefault, isHasTag = false) {
+  onAddToCart(item) {
+    this.props.addToCart(item);
+  }
+
+  renderProduct(isDefault, isHasTag = false, product) {
+    const thisItemInCart = this.props.cart.filter(
+      item => item.id === product.id
+    )[0];
+
     const {
       name,
       price,
@@ -11,7 +20,7 @@ class Product extends Component {
       description,
       thumbnailURL,
       quantity
-    } = this.props.product;
+    } = product;
     return isDefault ? (
       <div className="product">
         <div className="product-box">
@@ -100,24 +109,30 @@ class Product extends Component {
               </span>
             )}
           </p>
-          <button className="btn btn-primary my-1">add to cart</button>
+          <button
+            className="btn btn-primary my-1"
+            onClick={() => this.onAddToCart(product)}
+          >
+            add to cart ( {(thisItemInCart && thisItemInCart.quantity) || 0})
+          </button>
         </div>
       </div>
     );
   }
 
   render() {
-    const { isDefault, isHasTag } = this.props;
-    return this.renderProduct(isDefault, isHasTag);
+    const { isDefault, isHasTag, product } = this.props;
+    return this.renderProduct(isDefault, isHasTag, product);
   }
 }
 const mapStateToProps = state => {
   const common = state.common;
   return {
+    cart: common.cart,
     isDefault: common.productUI.isDefault
   };
 };
 export default connect(
   mapStateToProps,
-  null
+  { addToCart }
 )(Product);

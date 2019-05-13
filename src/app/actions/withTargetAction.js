@@ -1,4 +1,4 @@
-const withTargetDispatch = (dispatchAction, target) => async dispatch => {
+const withTargetDispatch = (dispatchAction, target) => dispatch => {
   const targetedDispatch = action => {
     const updatedAction = action;
     updatedAction.target = target;

@@ -6,6 +6,7 @@ import ProductList from "../routes/ProductList";
 import Register from "../routes/Register";
 import Login from "../routes/Login";
 import ProductDetail from "../routes/ProductDetail";
+import Cart from "../routes/Cart";
 
 const Router = () => (
   <Switch>
@@ -14,6 +15,7 @@ const Router = () => (
     <Route exact path={ROUTES.LOGIN} component={Login} />
     <Route exact path={ROUTES.PRODUCT_LIST} component={ProductList} />
     <Route exact path={ROUTES.PRODUCT_DETAIL} component={ProductDetail} />
+    <Route exact path={ROUTES.CART} component={Cart} />
   </Switch>
 );
 export default Router;
