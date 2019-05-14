@@ -10,12 +10,13 @@ import topMenu from "./ui/topMenuReducer";
 import productListContainer from "./ui/productListContainerReducer";
 import sessionReducer from "./data/sessionReducer";
 import userReducer from "./data/userReducer";
-
+import cart from "./data/cartReducer";
 export default combineReducers({
   common: combineReducers({
     category,
     topMenu,
-    productUI
+    productUI,
+    cart
   }),
   user: combineReducers({
     session: combineReducers({
