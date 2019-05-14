@@ -1,13 +1,13 @@
 import React from "react";
 import * as ROUTES from "app/constants/routes";
 import { withFirebase } from "services";
-import { withRouter } from "react-router-dom";
+import { withRouter, Link } from "react-router-dom";
 import { toast } from "react-toastify";
-
 const INITIAL_STATE = {
   email: "",
   password: "",
-  error: null
+  error: null,
+  prevPath: ""
 };
 
 class LoginForm extends React.Component {
@@ -16,6 +16,7 @@ class LoginForm extends React.Component {
 
     this.state = { ...INITIAL_STATE };
   }
+
   onSubmit(e) {
     e.preventDefault();
     const { email, password } = this.state;
@@ -23,7 +24,9 @@ class LoginForm extends React.Component {
       .loginWithEmailAndPassword(email, password)
       .then(() => {
         this.setState({ ...INITIAL_STATE });
-        this.props.history.push(ROUTES.HOMEPAGE);
+        // TODOS:Get previous route and check condition when should be go to HOMEPAGE and when should goBack()
+
+        this.props.history.goBack();
         toast.success("Đăng nhập thành công", {
           position: toast.POSITION.BOTTOM_RIGHT
         });
@@ -49,7 +52,6 @@ class LoginForm extends React.Component {
           <h2 className="heading-secondary heading-secondary--pattern-left">
             Đăng nhập{" "}
           </h2>
-          <button className="btn btn-primary">Đăng nhập</button>
         </div>
         <form className="login__form py-4" onSubmit={e => this.onSubmit(e)}>
           <h3 className="heading-tertiary py-2 text-left">
@@ -94,6 +96,10 @@ class LoginForm extends React.Component {
             </label>
           </div>
           <div className="form-group py-3">
+            <Link to={ROUTES.REGISTER} className="btn btn-primary">
+              Đăng ký tài khoảng
+            </Link>
+
             <button
               className="btn btn-primary"
               id="login-button"

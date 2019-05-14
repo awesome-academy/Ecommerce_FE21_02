@@ -14,7 +14,11 @@ const Router = () => (
     <Route exact path={ROUTES.REGISTER} component={Register} />
     <Route exact path={ROUTES.LOGIN} component={Login} />
     <Route exact path={ROUTES.PRODUCT_LIST} component={ProductList} />
-    <Route exact path={ROUTES.PRODUCT_DETAIL} component={ProductDetail} />
+    <Route
+      exact
+      path={`${ROUTES.PRODUCT_DETAIL}/:productId`}
+      component={ProductDetail}
+    />
     <Route exact path={ROUTES.CART} component={Cart} />
   </Switch>
 );

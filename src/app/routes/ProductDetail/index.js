@@ -17,7 +17,7 @@ class ProductDetail extends Component {
   }
 
   render() {
-    const { product } = this.props;
+    const { product, user } = this.props;
     return (
       <Fragment>
         <Navigation />
@@ -30,7 +30,7 @@ class ProductDetail extends Component {
             </div>
           </div>
         </div>
-        {product && <InfoBox product={product} />}
+        {product && <InfoBox product={product} user={user} />}
         <RelatedProducts />
       </Fragment>
     );
@@ -38,9 +38,11 @@ class ProductDetail extends Component {
 }
 const mapStateToProps = state => {
   const productDetailStore = state.productDetailPage;
+  const userStore = state.user;
 
   return {
-    product: productDetailStore.data.product.data
+    product: productDetailStore.data.product.data,
+    user: userStore.session.authUser
   };
 };
 export default connect(

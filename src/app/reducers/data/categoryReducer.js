@@ -24,7 +24,7 @@ export default (state = initialState, action) => {
         isFetching: false
       };
     }
-    case actionTypes.GET_PRODUCT_FAILURE: {
+    case actionTypes.GET_CATEGORY_FAILURE: {
       const { error: fetchError } = action.payload;
 
       return {

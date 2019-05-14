@@ -1,19 +1,26 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { compose } from "recompose";
+import * as ROUTES from "app/constants/routes";
 import { addToCart } from "../actions/cartAction";
 import newProduct01 from "images/products/newproduct_1.png";
+import { withRouter } from "react-router-dom";
 
 class Product extends Component {
   onAddToCart(item) {
     this.props.addToCart(item);
   }
-
+  onProductClicked(id) {
+    const { history } = this.props;
+    history.push(`${ROUTES.PRODUCT_DETAIL}/${id}`);
+  }
   renderProduct(isDefault, isHasTag = false, product) {
     const thisItemInCart = this.props.cart.filter(
       item => item.id === product.id
     )[0];
 
     const {
+      id,
       name,
       price,
       discountPercent,
@@ -36,7 +43,13 @@ class Product extends Component {
             </div>
             <div className="col-md-8">
               <h3 className="heading-tertiary product-box__title pt-4">
-                {name}
+                <a
+                  href="#"
+                  className="product-box__link"
+                  onClick={() => this.onProductClicked(id)}
+                >
+                  {name}
+                </a>
               </h3>
               <p className="number-highlight my-1">
                 {discountPercent > 0 ? (price * discountPercent) / 100 : price}
@@ -97,8 +110,13 @@ class Product extends Component {
               </span>
             </div>
           )}
-
-          <h3 className="heading-tertiary pt-4">{name}</h3>
+          <a
+            href="#"
+            className="product-box__link"
+            onClick={() => this.onProductClicked(id)}
+          >
+            <h3 className="heading-tertiary pt-4">{name}</h3>
+          </a>
           <p className="number-highlight number-highlight--small my-1">
             {discountPercent > 0 ? (price * discountPercent) / 100 : price}
             <sup className="number-highlight__sub">đ </sup>
@@ -132,7 +150,11 @@ const mapStateToProps = state => {
     isDefault: common.productUI.isDefault
   };
 };
-export default connect(
-  mapStateToProps,
-  { addToCart }
+
+export default compose(
+  connect(
+    mapStateToProps,
+    { addToCart }
+  ),
+  withRouter
 )(Product);

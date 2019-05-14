@@ -4,7 +4,7 @@ import { targets } from "../constants";
 import category from "./data/categoryReducer";
 import product from "./data/productReducer";
 import productUI from "./ui/productReducer";
-
+import rating from "./data/ratingReducer";
 import homeContainer from "./ui/homeContainerReducer";
 import topMenu from "./ui/topMenuReducer";
 import productListContainer from "./ui/productListContainerReducer";
@@ -19,12 +19,7 @@ export default combineReducers({
     cart
   }),
   user: combineReducers({
-    session: combineReducers({
-      sessionReducer
-    }),
-    data: combineReducers({
-      userReducer
-    })
+    session: sessionReducer
   }),
   homePage: combineReducers({
     ui: combineReducers({
@@ -53,7 +48,8 @@ export default combineReducers({
       product: filterActions(
         product,
         action => action.target === targets.PRODUCT_DETAIL_PAGE
-      )
+      ),
+      rating
     })
   })
 });
