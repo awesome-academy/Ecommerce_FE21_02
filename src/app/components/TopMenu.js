@@ -124,7 +124,7 @@ const mapStateToProps = state => {
   return {
     cartItems: common.cart,
     isWhite: common.topMenu.isWhiteTopMenu,
-    authUser: userStore.session.sessionReducer.authUser
+    authUser: userStore.session.authUser
   };
 };
 

@@ -10,16 +10,19 @@ class Content extends Component {
       return <Product key={product.id} product={product} />;
     });
   }
-
+  getProductListClassName = isDefaultList => {
+    if (isDefaultList) {
+      return "product-list__list product-list__list--default";
+    } else {
+      return "product-list__list";
+    }
+  };
   render() {
+    debugger;
     return (
       <div className="product-list__item product-list__content">
         <Option />
-        <div
-          className={`product-list__list ${
-            this.props.isDefaultList ? "product-list__list--default" : null
-          }`}
-        >
+        <div className={this.getProductListClassName(this.props.isDefaultList)}>
           {this.props.products && this.renderList(this.props.products)}
         </div>
       </div>

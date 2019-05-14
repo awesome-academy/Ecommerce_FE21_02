@@ -8,6 +8,7 @@ const initialState = {
 export default (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.TOGGLE_DISPLAY_LIST: {
+      debugger;
       return {
         isDefaultList: !state.isDefaultList
       };

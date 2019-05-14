@@ -2,6 +2,7 @@ import app from "firebase/app";
 import "firebase/auth";
 import "firebase/firestore";
 import "firebase/storage";
+import uuid from "uuid";
 const config = {
   apiKey: process.env.REACT_APP_API_KEY,
   authDomain: process.env.REACT_APP_AUTH_DOMAIN,
@@ -138,6 +139,53 @@ export default class FirebaseService {
         reject(e);
       }
     });
+
+  // *** Rating API ***
+  ratingsByUser = userId =>
+    new Promise(async (resolve, reject) => {
+      try {
+        let ratingSnapshot = await this.db
+          .collection("ratings")
+          .where("userId", "==", userId)
+          .get();
+        let ratings = ratingSnapshot.docs.map(ratingDoc => {
+          return this.docToObject(ratingDoc);
+        });
+        resolve({ data: ratings });
+      } catch (e) {
+        reject(e);
+      }
+    });
+  ratingsByProduct = async productId => {
+    let ratingsSnapshot = await this.db
+      .collection("ratings")
+      .where("productId", "==", productId)
+      .get();
+    let dataPromises = ratingsSnapshot.docs.map(async ratingDoc => {
+      let rating = ratingDoc.data();
+      let userDoc = await this.user(rating.userId).get();
+
+      return {
+        id: ratingDoc.id,
+        ...rating,
+        userEmail: userDoc.data().email
+      };
+    });
+    return await Promise.all(dataPromises);
+  };
+
+  setRating = (userId, productId, value, content) => {
+    let rating = {
+      userId,
+      productId,
+      value,
+      content
+    };
+    return this.db
+      .collection("ratings")
+      .doc(uuid.v4())
+      .set(rating);
+  };
 }
 
 export const firebase = new FirebaseService();

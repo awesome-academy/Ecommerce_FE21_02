@@ -32,7 +32,6 @@ export const getProductsBy = subCategoryId => async dispatch => {
 
   try {
     const { data } = await firebase.productBy(subCategoryId);
-    debugger;
     dispatch({
       type: actionTypes.GET_PRODUCT_SUCCESS,
       payload: {

@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from "react";
 import * as ROUTES from "app/constants/routes";
 import { withFirebase } from "services";
-import { withRouter } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import { toast } from "react-toastify";
 
 const INITIAL_STATE = {
@@ -142,7 +142,9 @@ class RegisterForm extends Component {
             >
               Đăng ký
             </button>
-            <button className="btn btn-primary">Quay lại</button>
+            <Link to={ROUTES.LOGIN} className="btn btn-primary">
+              Quay lại
+            </Link>
           </div>
         </form>
       </div>
