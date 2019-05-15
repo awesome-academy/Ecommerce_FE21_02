@@ -8,7 +8,6 @@ export const getProduct = productId => async dispatch => {
 
   try {
     const { data } = await firebase.product(productId);
-    debugger;
     dispatch({
       type: actionTypes.GET_PRODUCT_SUCCESS,
       payload: {

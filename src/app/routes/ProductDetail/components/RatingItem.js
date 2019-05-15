@@ -2,7 +2,6 @@ import React from "react";
 import StarRatingComponent from "react-star-rating-component";
 
 const RatingItem = ({ value, content, email }) => {
-  debugger;
   return (
     <div className="card">
       <div className="card-body">

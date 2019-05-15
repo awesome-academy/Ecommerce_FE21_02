@@ -18,7 +18,6 @@ class Content extends Component {
     }
   };
   render() {
-    debugger;
     return (
       <div className="product-list__item product-list__content">
         <Option />

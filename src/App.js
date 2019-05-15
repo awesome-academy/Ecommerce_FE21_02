@@ -3,8 +3,7 @@ import { BrowserRouter as Router } from "react-router-dom";
 import { Provider } from "react-redux";
 import store from "./store/index";
 import Layout from "./app/layout/index";
-import { FirebaseService, firebase, FirebaseContext } from "./services";
-
+import { firebase, FirebaseContext } from "./services";
 import "bootstrap";
 import "@fortawesome/fontawesome-free/js/all";
 import "react-toastify/dist/ReactToastify.css";
@@ -20,7 +19,6 @@ function App() {
           <Layout />
         </Router>
       </FirebaseContext.Provider>
-      ,
     </Provider>
   );
 }
