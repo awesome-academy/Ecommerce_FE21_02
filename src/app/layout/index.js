@@ -22,6 +22,7 @@ class Layout extends Component {
   }
   componentDidMount() {
     const { history } = this.props;
+    debugger;
     if (
       history.location.pathname.replace("/", "") ===
       ROUTES.ADMIN_BASE.replace("/", "")
