@@ -8,7 +8,6 @@ export const getRatingsByProduct = productId => async dispatch => {
 
   try {
     const data = await firebase.ratingsByProduct(productId);
-    debugger;
     dispatch({
       type: actionTypes.GET_RATING_SUCCESS,
       payload: {
@@ -32,7 +31,6 @@ export const getRatingsByUser = userId => async dispatch => {
 
   try {
     const { data } = await firebase.ratingsByUser(userId);
-    debugger;
     dispatch({
       type: actionTypes.GET_RATING_SUCCESS,
       payload: {
