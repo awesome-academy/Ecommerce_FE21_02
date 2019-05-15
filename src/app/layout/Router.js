@@ -7,6 +7,7 @@ import Register from "../routes/Register";
 import Login from "../routes/Login";
 import ProductDetail from "../routes/ProductDetail";
 import Cart from "../routes/Cart";
+import UserDashboard from "../routes/User";
 
 const Router = () => (
   <Switch>
@@ -20,6 +21,7 @@ const Router = () => (
       component={ProductDetail}
     />
     <Route exact path={ROUTES.CART} component={Cart} />
+    <Route path={ROUTES.USER_BASE} component={UserDashboard} />
   </Switch>
 );
 export default Router;

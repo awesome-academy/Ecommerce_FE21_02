@@ -55,11 +55,6 @@ class TopMenu extends React.Component {
                 <div className="menu__list">
                   <div className="menu__item">
                     <a href="#" className="menu__link">
-                      Tài khoảng của tôi
-                    </a>
-                  </div>{" "}
-                  <div className="menu__item">
-                    <a href="#" className="menu__link">
                       Trạng thái đơn hàng
                     </a>
                   </div>{" "}
@@ -67,11 +62,14 @@ class TopMenu extends React.Component {
                   {authUser ? (
                     <Fragment>
                       <div className="menu__item">
-                        <a href="#" className="menu__link">
+                        <Link
+                          to={ROUTES.USER_ROUTES.DASHBOARD}
+                          className="menu__link"
+                        >
                           {authUser.fullName
                             ? authUser.fullName
                             : authUser.email}
-                        </a>
+                        </Link>
                       </div>
                       <div className="menu__item">
                         <a
