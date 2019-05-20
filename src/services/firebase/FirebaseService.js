@@ -80,6 +80,12 @@ export default class FirebaseService {
 
   user = uid => this.db.collection("users").doc(uid);
 
+  updateUser = (newUser, uid) => {
+    return this.db
+      .collection("users")
+      .doc(uid)
+      .update(newUser);
+  };
   // *** Category API ***
 
   categories = async () => {
